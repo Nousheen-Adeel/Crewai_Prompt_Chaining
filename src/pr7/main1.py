@@ -2,7 +2,11 @@ from crewai.flow.flow import Flow, start, listen
 import time
 from litellm import completion
 
-API_Key = "AIzaSyDneZ2VMOcXGAHRhwKtZkuQcWfzcp82fXc"
+# Load API Key
+load_dotenv()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+
 
 class CityFunFacts(Flow):
     
@@ -11,7 +15,7 @@ class CityFunFacts(Flow):
     def get_fact(self):
         result=completion(
             model="gemini/gemini-1.5-flash",
-            api_key=API_Key,
+            api_key=GEMINI_API_KEY,
             messages=[{"content":"return any random city name of Pakistan", "role": "user"}],
         )
 
